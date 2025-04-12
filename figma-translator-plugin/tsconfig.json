@@ -1,0 +1,25 @@
+// tsconfig.json should look like this:
+{
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["es6", "dom"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "typeRoots": [      // <<< Ensure this section is correct
+      "./node_modules/@types",
+      "./node_modules/@figma"
+    ]
+  },
+  "include": [
+    "src/**/*.ts"     // <<< Ensure ONLY src is included here
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "TranslationTest",
+  "id": "",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html",
+  "editorType": ["figma"],
+  "networkAccess": {
+    "allowedDomains": [
+      "https://*.vercel.app" 
+    ],        
+    "reasoning": "Allows the plugin to talk to the proxy server hosted on Vercel."
+  },
+  "permissions": []
+}
