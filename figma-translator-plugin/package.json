@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc && cp src/ui.html dist/ui.html",
-    "watch": "tsc -w"
+    "dev": "vercel dev"
   },
-  "devDependencies": {
-    "@figma/plugin-typings": "^1.109.0",
-    "typescript": "^5.8.3"
+  "dependencies": {
+    "@vercel/node": "^3.0.0"
   }
 }
