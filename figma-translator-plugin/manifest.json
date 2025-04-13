@@ -6,6 +6,6 @@
   "ui": "dist/ui.html",
   "editorType": ["figma"],
   "networkAccess": {
-    "allowedDomains": ["figma-translator-plugin-phi.vercel.app"]
-  }
+    "allowedDomains": ["https://figma-translator-plugin-phi.vercel.app"]
+ }
 }

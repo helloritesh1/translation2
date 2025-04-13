@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "lib": ["es6", "dom"],
+    "lib": ["es6"], // Remove "dom" to avoid conflicts
     "outDir": "dist",
     "rootDir": "src",
-    "strict": true
-  }
+    "strict": true,
+    "skipLibCheck": true, // Add this to ignore declaration conflicts
+    "types": [],
+    "typeRoots": ["node_modules/@types"]
+  },
+  "include": ["src/**/*"]
 }
