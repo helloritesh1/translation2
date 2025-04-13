@@ -1,20 +1,11 @@
 {
-  "name": "figma-translation-plugin",
+  "name": "figma-translator-plugin",
   "version": "1.0.0",
-  "description": "A Figma plugin for translating wireframes",
-  "main": "code.js",
   "scripts": {
-    "build": "npx tsc -p tsconfig.json && cp src/ui.html dist/ui.html",
-    "watch": "tsc -p tsconfig.json --watch"
+    "build": "tsc && cp src/ui.html dist/ui.html",
+    "watch": "tsc -w"
   },
-  "keywords": [
-    "figma",
-    "plugin",
-    "translation"
-  ],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.8.3"
+    "typescript": "^5.0.0"
   }
 }

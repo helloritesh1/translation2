@@ -1,15 +1,11 @@
 {
-  "name": "TranslationTest",
-  "id": "",
+  "name": "AI Translator",
+  "id": "1234567890",
   "api": "1.0.0",
   "main": "dist/code.js",
   "ui": "dist/ui.html",
   "editorType": ["figma"],
   "networkAccess": {
-    "allowedDomains": [
-      "https://*.vercel.app" 
-    ],        
-    "reasoning": "Allows the plugin to talk to the proxy server hosted on Vercel."
-  },
-  "permissions": []
+    "allowedDomains": ["figma-translator-plugin-phi.vercel.app"]
+  }
 }
