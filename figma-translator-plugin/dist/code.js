@@ -15,17 +15,19 @@ figma.showUI(__html__, { width: 320, height: 200 });
 figma.ui.onmessage = (msg) => __awaiter(void 0, void 0, void 0, function* () {
     if (msg.type === 'translate') {
         try {
+            // Validate selection
             const selection = figma.currentPage.selection[0];
             if (!selection || selection.type !== 'FRAME') {
-                figma.notify('Select a frame first');
+                figma.notify('❌ Select a frame first');
                 return;
             }
+            // Extract text nodes
             const textNodes = selection.findAll(node => node.type === 'TEXT');
             const texts = textNodes.map(node => ({
                 id: node.id,
                 text: node.characters
             }));
-            // Update fetch call with Figma-specific type
+            // API call
             const response = yield fetch(PROXY_SERVER_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -33,9 +35,12 @@ figma.ui.onmessage = (msg) => __awaiter(void 0, void 0, void 0, function* () {
                     texts: texts.map(t => t.text),
                     targetLanguages: TARGET_LANGUAGES
                 })
-            }); // Removed type assertion
-            if (!response.ok)
-                throw new Error(`HTTP ${response.status}`);
+            });
+            // Handle response
+            if (!response.ok) {
+                const error = yield response.text();
+                throw new Error(`Server error: ${response.status} - ${error}`);
+            }
             const translations = yield response.json();
             // Create translated frames
             const baseX = selection.x + selection.width + 50;
@@ -47,14 +52,14 @@ figma.ui.onmessage = (msg) => __awaiter(void 0, void 0, void 0, function* () {
                 frame.findAll(node => node.type === 'TEXT')
                     .forEach((textNode, j) => {
                     const tn = textNode;
-                    tn.characters = translations[lang][j];
+                    tn.characters = translations[lang][j] || `[Translation Error]`;
                 });
                 figma.currentPage.appendChild(frame);
             });
-            figma.notify('Translations created!');
+            figma.notify('✅ Translations created!');
         }
         catch (error) {
-            figma.notify(`Error: ${error.message}`);
+            figma.notify(`❌ Error: ${error.message}`);
             console.error(error);
         }
     }

@@ -5,6 +5,11 @@
     "build": "tsc && cp src/ui.html dist/ui.html",
     "dev": "vercel dev"
   },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.63.0",
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
+  },
   "dependencies": {
     "@vercel/node": "^3.0.0"
   }
