@@ -1,23 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body { padding: 20px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-        button { background: #18A0FB; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
-        button:disabled { background: #999; }
-    </style>
+    <meta charset="UTF-8"><title>OpenAI Translator</title>
+    <style>/* Basic CSS */ body{font-family:sans-serif;padding:15px;} button{padding:10px;background-color:#0d99ff;color:white;border:none;cursor:pointer;width:100%;margin-bottom:10px;} button:disabled{background-color:#ccc;} #status{margin-top:10px;padding:8px;background:#eee;min-height:20px;} .error-text{color:red;}</style>
 </head>
 <body>
-    <h3>AI Translator</h3>
-    <p>Select a frame and click translate</p>
-    <button id="translateBtn">✨ Generate Translations</button>
-
+    <h3>OpenAI Frame Translator</h3>
+    <!-- API Key Input Removed -->
+    <button id="translateBtn">Translate Selected Frame</button>
+    <div id="status">Ready. Select frame & click translate.</div>
     <script>
-        document.getElementById('translateBtn').onclick = () => {
-            parent.postMessage({ pluginMessage: { type: 'translate' } }, '*');
-            this.disabled = true;
-            setTimeout(() => this.disabled = false, 5000);
-        };
+        document.addEventListener('DOMContentLoaded', () => {
+            const translateBtn = document.getElementById('translateBtn');
+            const statusDiv = document.getElementById('status');
+
+            if (!translateBtn || !statusDiv) { /* ... */ return; }
+
+            function updateStatus(message, isError = false) {
+                 /* ... same status update logic ... */
+                 console.log(`[UI] Status: ${message}`); statusDiv.textContent = message; statusDiv.className = isError ? 'error-text' : ''; const processing = message.includes('...'); translateBtn.disabled = processing;
+            }
+
+            translateBtn.onclick = () => {
+                // No API key needed from user here
+                console.log('[UI] Translate button clicked.');
+                updateStatus('Sending request to plugin...');
+                translateBtn.disabled = true;
+                // Just send the trigger message
+                parent.postMessage({ pluginMessage: { type: 'start-translation-process' } }, '*');
+            };
+
+            window.onmessage = (event) => {
+                 if (event.data.pluginMessage?.type === 'show-status') {
+                     updateStatus(event.data.pluginMessage.message, event.data.pluginMessage.isError);
+                 }
+                 // No storage messages needed
+            };
+             updateStatus('Ready. Select frame & click translate.');
+        });
     </script>
 </body>
 </html>

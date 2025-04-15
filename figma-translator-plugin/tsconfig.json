@@ -1,13 +1,25 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "lib": ["es6"],
-    "outDir": "dist",
-    "rootDir": "src",
+    "lib": ["es6", "dom"],
+    "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": ["@figma/plugin-typings", "node"]
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/@figma"
+    ]
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "api" // Exclude the api folder from this TS build
+  ]
 }

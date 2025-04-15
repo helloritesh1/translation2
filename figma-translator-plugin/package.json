@@ -1,17 +1,15 @@
 {
-  "name": "figma-translator-plugin",
+  "name": "figma-translator-proxy-plugin",
   "version": "1.0.0",
+  "description": "Figma translator using a Vercel proxy for DeepL",
   "scripts": {
-    "build": "tsc && cp src/ui.html dist/ui.html",
-    "dev": "vercel dev --port 3001"
+    "build": "npx tsc -p tsconfig.json && cp src/ui.html dist/ui.html",
+    "watch": "npm run build -- --watch"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.63.0",
-    "@types/node": "^20.12.7",
-    "typescript": "^5.4.5"
-  },
-  "dependencies": {
-    "@vercel/node": "^3.0.0",
-    "node-fetch": "^2.6.7"
+    "@figma/plugin-typings": "^1.90.0",
+    "@types/node": "^18.19.3", 
+    "typescript": "^5.3.3"
   }
+  
 }
